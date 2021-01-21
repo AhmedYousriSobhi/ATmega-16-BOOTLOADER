@@ -13,8 +13,8 @@ That's to make sure we flashed the app code successfully into flash memory and t
 Baudrate = 4800 ,parity = None ,Stop Bit = One
 
 ### HEX File of APP CODE:
-1- We need to extracte the data Hex Bytes from the APP CODE Hex file generated.
-2- The Generated APP CODE Hex file is located inside the Debug folder.
+#### 1- We need to extracte the data Hex Bytes from the APP CODE Hex file generated.
+#### 2- The Generated APP CODE Hex file is located inside the Debug folder.
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)
 
 ## Bootloader Code
