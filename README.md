@@ -18,9 +18,11 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)
 #### 3- The Hex file Openned in Notepad++:
 ![3](https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG)
-#### 4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes, Take a copy of the hex file and past it inside the same folder as HexToArray c Code.
+#### 4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.
+##### Note: The C code github link: https://github.com/AhmedYousriSobhi/Hex-To-array-txt
+#### 5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)
-#### 5- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
+#### 6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
 ![5](https://user-images.githubusercontent.com/66730765/105391152-7f574000-5c22-11eb-97a9-a473c2b624cc.PNG)
 
 ## II- Bootloader Code
