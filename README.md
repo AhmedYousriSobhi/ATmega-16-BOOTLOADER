@@ -24,6 +24,9 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)
 #### 6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
 ![5](https://user-images.githubusercontent.com/66730765/105391152-7f574000-5c22-11eb-97a9-a473c2b624cc.PNG)
+#### 7- The Output File is named : OutputArray.txt, and looks like:
+![7](https://user-images.githubusercontent.com/66730765/105391691-0c9a9480-5c23-11eb-8a04-d221ee01afa5.PNG)
+##### The C parsing code is designed so it takes the HEX file and output the txt file in array hex bytes format, Code size in bytes and number of pages in flash memory. 
 
 ## II- Bootloader Code
 
