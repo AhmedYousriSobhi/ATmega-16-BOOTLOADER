@@ -142,23 +142,70 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ##### ‣ To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()<br/>
 ## ◦ III.2.2- Display MAIN MENUE Get Command from User:<br/>
 ##### ‣ CODE: 
-![15](https://user-images.githubusercontent.com/66730765/105471060-02b87600-5ca3-11eb-9a1e-a9d0bd850c5e.PNG)
+	#Get Command From User.
+    	cmd = '0'
+    	while(1):
+        	print(50*'-','\n\t\tM A I N  M E N U E\n')
+        	cmd= input("\nPY_DEBUG: COMMAND LIST:\
+                    	\n\tOPEN_PORT : TO OPEN COM PORT SELECTED.\
+                    	\n\tCLOSE_PORT : TO CLOSE COM PORT.\
+                    	\n\tCONFIG_COM : TO CHANGE COM PORT.\
+                    	\n\nYOUR COMMAND IS : ")
+        	if cmd == "OPEN_PORT" :
+            		ser.open()
+            		print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
+            		comBoard()
+        	elif cmd == "CLOSE_PORT":
+            		ser.close()
+            		print("PY_DEBUG: COM PORT IS CLOSED? ", not ser.is_open)
+        	elif cmd == "CONFIG_COM":
+            		print("PY_DEBUG: ENTERING CONFIGURATION COM BOARD.")
+            		comConfig()
+        	else:
+            		print("PY_DEBUG: UNDEFINED COMMAND.")
 ##### ‣ Run Time:
 ![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
 ##### ‣ The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.<br/>
 ‣ let's first explain CONFIG_COM command:<br/>
-### ◦ Command : CONFIG_COM<br/>
+## ∙ Command : CONFIG_COM<br/>
 ##### ‣ Code:
-![16](https://user-images.githubusercontent.com/66730765/105472343-7f981f80-5ca4-11eb-99b9-fc8bc75023d0.PNG) 
+	#*******COM PORT FUNCTIONS********#        
+	def comConfig():
+    	print(50*'-',"\n\t",ser.port, "C O N F I G  B O A R D\n")
+    	while True:
+        	cmd= input("\nPY_DEBUG: COMMAND LIST:\
+                    	\n\tCHANGE_COM : TO CHANGE COM PORT.\
+                    	\n\tCHANGE_BAUD : TO CHANGE BAUDRATE.\
+                    	\n\tRETURN : TO RETURN TO MAIN MENUE.\
+                    	\n\nYOUR COMMAND IS : ")
+        	if cmd == "CHANGE_COM":
+            		ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+        	elif cmd == "CHANGE_BAUD":
+            		ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
+        	elif cmd == "RETURN":
+            		break;
+        	else:
+            		print("PY_DEBUG: UNDEFINED COMMAND!!")
 ##### ‣ Run time:
 ![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
+### ◦ Command : CHANGE_COM <br/>
+     #To change the com port, as an input from the user.
+     ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+### ◦ Command : CHANGE_BAUD <br/>
+     #To change the Baudrate of the com port, as an input from the user.
+     ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
 ### ◦ Command : RETURN <br/> 
-##### ‣ Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
-![18](https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG)
-### ◦ Command : OPEN_PORT <br/> 
-#####          ‣ Firstly, open the selected com port.<br/>
-#####          ‣ Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
-#####          ‣ Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
+     #Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
+     break
+## ∙ Command : OPEN_PORT <br/>
+<img align="right" src="![18](https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG">
+##### ‣ Firstly, open the selected com port.<br/>
+##### ‣ Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
+##### ‣ Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
+	if cmd == "OPEN_PORT" :
+        		ser.open()
+        		print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
+        		comBoard()
 ![19](https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG)<br/>
 ##### ‣ if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
 ![20](https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG)<br/>
