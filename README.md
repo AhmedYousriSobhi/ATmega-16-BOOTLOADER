@@ -51,3 +51,8 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ##### Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
 ![13](https://user-images.githubusercontent.com/66730765/105467150-f251cc80-5c9d-11eb-85b4-fa0c9fec7d0c.PNG)
 ##### To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()
+#### 2- Display MAIN MENUE Get Command from User:
+CODE: 
+![15](https://user-images.githubusercontent.com/66730765/105471060-02b87600-5ca3-11eb-9a1e-a9d0bd850c5e.PNG)
+Run Time:
+![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
