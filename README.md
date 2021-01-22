@@ -53,7 +53,7 @@ I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generate
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)<br/>
 #### I.2.6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
 ![5](https://user-images.githubusercontent.com/66730765/105391152-7f574000-5c22-11eb-97a9-a473c2b624cc.PNG)<br/>
-#### I.2.7- The Output File is named : OutputArray.txt, and looks like:<img align="right" src="https://user-images.githubusercontent.com/66730765/105492124-1de5ae80-5cc0-11eb-89ab-e75e6f911b47.PNG">
+#### I.2.7- The Output File is named : OutputArray.txt, and looks like:
 	{
  	0x0C, 0x94, 0x2A, 0x00, 0x0C, 0x94, 0x3F, 0x00, 0x0C, 0x94, 0x3F, 0x00, 0x0C, 0x94, 0x3F, 0x00,
  	0x0C, 0x94, 0x3F, 0x00, 0x0C, 0x94, 0x3F, 0x00, 0x0C, 0x94, 0x3F, 0x00, 0x0C, 0x94, 0x3F, 0x00,
