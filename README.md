@@ -197,8 +197,8 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ### ◦ Command : RETURN <br/> 
      #Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
      break
-## ∙ Command : OPEN_PORT <br/>
-<img align="right" src="![18](https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG">
+## ∙ Command : OPEN_PORT 
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG">
 ##### ‣ Firstly, open the selected com port.<br/>
 ##### ‣ Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
 ##### ‣ Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
