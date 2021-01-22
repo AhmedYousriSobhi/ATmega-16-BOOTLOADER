@@ -23,10 +23,7 @@ That's to make sure we flashed the app code successfully into flash memory and t
 ## I.1-  USART Configuration:<br/>
 Baudrate = 4800 ,parity = None ,Stop Bit = One
 
-## I.2-  HEX File of APP CODE:
-<details>
-<summary>expand/compress</summary>
-	
+## I.2-  HEX File of APP CODE:	
 I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated.<br/>
 I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 
@@ -93,7 +90,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 	#define NO_OF_PAGES 3
 
 ##### The C parsing code is designed so it takes the HEX file and output the txt file in array hex bytes format, Code size in bytes and number of pages in flash memory. 
-</details>
+
 </details>
 
 # II- Bootloader Code
@@ -110,35 +107,20 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 <summary>expand/compress</summary>
 	
 ## • III.1 This Script is used to
-<details>
-<summary>expand/compress</summary>
 	
 ##### ‣ 1- Talk to the Bootloader.<br/>
 ‣ 2- Read Hex Bytes from the OutputArray.txt file - from APP Code Stage - and Transmit those bytes through USART to Boodloader.
-</details>
 
-### • III.2 LET'S EXPLAIN THE SCRIPT
-<details>
-<summary>expand/compress</summary>
-	
-## ◦ III.2.1  First The imported modules:<br/>
-
-<details>
-<summary>expand/compress</summary>
-	
+### • III.2 LET'S EXPLAIN THE SCRIPT	
+## ◦ III.2.1  First The imported modules:<br/>	
 ##### ‣ Three Modules we imported, the third one was created and designed as we will need it in a next step, so i'll explain it later when we will need it. 
 	import serial
 	import serial.tools.list_ports
 	from TXT_FILE_HANDLER import *
 ##### ‣ Modules: "serial" is used to create a serial com port object, and configure its name, baudrate, parity, stop bit ,... etc <br/>
 ‣ Modules: "serial.tools.list_ports" is used to get all connected com ports on your os device PC/LAPTOP.
-
-</details>
 	
-## ◦ III.2.2  PORT CONFIGURATION
-<details>
-<summary>expand/compress</summary>
-	
+## ◦ III.2.2  PORT CONFIGURATION	
 ##### ‣ Port Configuration: --: Implementation.	
 	#*********PORT CONFIGURATION**************#
 	# if this the main py file to run ,
@@ -175,7 +157,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ‣ Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
 ![25](https://user-images.githubusercontent.com/66730765/105495480-e6c5cc00-5cc4-11eb-81f9-d580ac4c11e2.png)
 ##### ‣ To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()<br/>
-‣ let's first explain CONFIG_COM command:<br/>
+### ◦ let's first explain CONFIG_COM command:<br/>
 ## ∙ Command : CONFIG_COM<br/>
 ##### ‣ comConfig: --:Implementation:
 	#*******COM PORT FUNCTIONS********#        
@@ -206,12 +188,8 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ### ◦ Command : RETURN <br/> 
      # Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
      break
-     
-</details>
 
 ## ◦ III.2.3- Display MAIN MENUE Get Command from User:<br/>
-<details>
-<summary>expand/compress</summary>
 	
 ##### ‣ Main_Menue: --:Implementation. 
 	#Get Command From User.
@@ -258,12 +236,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
 ##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
 
-</details>
-
 ## ◦ III.2.4 Python Predefined command : BOOTLOADER FUNCTIONS
-<details>
-<summary>expand/compress</summary>
-	
 ### ◦ Command : BLD_LIST  
         # Calls BLD_CMD_LIST() Function that send char 'A' to Bootloader 
 	# and receive the response which is the Bootloader command list we defined in Bootloader code.
@@ -323,6 +296,4 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
         		else:
             			print("PY_DEBUG: UNDEFINED COMMAND.")
 				
-</details>
-</details>
 </details>
