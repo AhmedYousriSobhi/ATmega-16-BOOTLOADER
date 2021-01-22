@@ -5,6 +5,9 @@
 #### This project is divided into three part:
 
 # I- Application Code
+<details>
+<summary>expand/compress</summary>
+
 #### I just wrote a simple UART application code that just transmit two string messages over USART channel.
     int main(void)
     {
@@ -21,6 +24,9 @@ That's to make sure we flashed the app code successfully into flash memory and t
 Baudrate = 4800 ,parity = None ,Stop Bit = One
 
 ## I.2-  HEX File of APP CODE:
+<details>
+<summary>expand/compress</summary>
+	
 I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated.<br/>
 I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 
@@ -50,7 +56,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 	:00000001FF
 
 #### I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
-##### Note: The C code github link: https://github.com/AhmedYousriSobhi/Hex-To-array-txt <br/>
+##### Note: The [C code github link](https://github.com/AhmedYousriSobhi/Hex-To-array-txt)  <br/>
 #### I.2.5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)<br/>
 #### I.2.6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
@@ -87,24 +93,53 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 	#define NO_OF_PAGES 3
 
 ##### The C parsing code is designed so it takes the HEX file and output the txt file in array hex bytes format, Code size in bytes and number of pages in flash memory. 
+</details>
+</details>
 
 # II- Bootloader Code
+<details>
+<summary>expand/compress</summary>
+	
 ![8](https://user-images.githubusercontent.com/66730765/105463206-62f5ea80-5c98-11eb-917e-2a82609d416d.PNG)
 ![9](https://user-images.githubusercontent.com/66730765/105463210-638e8100-5c98-11eb-82fe-266756800d8d.PNG)
 
+</details>
+
 # III- Python Script
+<details>
+<summary>expand/compress</summary>
+	
 ## • III.1 This Script is used to
+<details>
+<summary>expand/compress</summary>
+	
 ##### ‣ 1- Talk to the Bootloader.<br/>
 ‣ 2- Read Hex Bytes from the OutputArray.txt file - from APP Code Stage - and Transmit those bytes through USART to Boodloader.
+</details>
+
 ### • III.2 LET'S EXPLAIN THE SCRIPT
+<details>
+<summary>expand/compress</summary>
+	
 ## ◦ III.2.1  First The imported modules:<br/>
+
+<details>
+<summary>expand/compress</summary>
+	
 ##### ‣ Three Modules we imported, the third one was created and designed as we will need it in a next step, so i'll explain it later when we will need it. 
 	import serial
 	import serial.tools.list_ports
 	from TXT_FILE_HANDLER import *
 ##### ‣ Modules: "serial" is used to create a serial com port object, and configure its name, baudrate, parity, stop bit ,... etc <br/>
 ‣ Modules: "serial.tools.list_ports" is used to get all connected com ports on your os device PC/LAPTOP.
+
+</details>
+	
 ## ◦ III.2.2  PORT CONFIGURATION
+<details>
+<summary>expand/compress</summary>
+	
+##### ‣ Port Configuration: --: Implementation.	
 	#*********PORT CONFIGURATION**************#
 	# if this the main py file to run ,
 	# so if another program run , it will not run the code inside this if.          
@@ -127,7 +162,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
     	print("PY_DEBUG: LIST OF CONNECTED COM PORTS :")
     	for port, desc, hwid in sorted(ports):
             	print("{}: {} [{}]".format(port, desc, hwid))
-##### ‣ Run Time: 
+##### ‣ Port Configuration: --: Run Time. 
 ![12](https://user-images.githubusercontent.com/66730765/105466210-963a7880-5c9c-11eb-88ef-58d202f13f63.PNG)
 ##### ‣ In my case, the TTL-USB is COM4<br/>
 ![12](https://user-images.githubusercontent.com/66730765/105466316-b833fb00-5c9c-11eb-8613-75c924bc25d9.PNG)
@@ -140,8 +175,45 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ‣ Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
 ![25](https://user-images.githubusercontent.com/66730765/105495480-e6c5cc00-5cc4-11eb-81f9-d580ac4c11e2.png)
 ##### ‣ To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()<br/>
-## ◦ III.2.2- Display MAIN MENUE Get Command from User:<br/>
-##### ‣ CODE: 
+‣ let's first explain CONFIG_COM command:<br/>
+## ∙ Command : CONFIG_COM<br/>
+##### ‣ comConfig: --:Implementation:
+	#*******COM PORT FUNCTIONS********#        
+	def comConfig():
+    	print(50*'-',"\n\t",ser.port, "C O N F I G  B O A R D\n")
+    	while True:
+        	cmd= input("\nPY_DEBUG: COMMAND LIST:\
+                    	\n\tCHANGE_COM : TO CHANGE COM PORT.\
+                    	\n\tCHANGE_BAUD : TO CHANGE BAUDRATE.\
+                    	\n\tRETURN : TO RETURN TO MAIN MENUE.\
+                    	\n\nYOUR COMMAND IS : ")
+        	if cmd == "CHANGE_COM":
+            		ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+        	elif cmd == "CHANGE_BAUD":
+            		ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
+        	elif cmd == "RETURN":
+            		break;
+        	else:
+            		print("PY_DEBUG: UNDEFINED COMMAND!!")
+##### ‣ comConfig: --: Run time:
+![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
+### ◦ Command : CHANGE_COM <br/>
+     # To change the com port, as an input from the user.
+     ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+### ◦ Command : CHANGE_BAUD <br/>
+     # To change the Baudrate of the com port, as an input from the user.
+     ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
+### ◦ Command : RETURN <br/> 
+     # Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
+     break
+     
+</details>
+
+## ◦ III.2.3- Display MAIN MENUE Get Command from User:<br/>
+<details>
+<summary>expand/compress</summary>
+	
+##### ‣ Main_Menue: --:Implementation. 
 	#Get Command From User.
     	cmd = '0'
     	while(1):
@@ -163,40 +235,9 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
             		comConfig()
         	else:
             		print("PY_DEBUG: UNDEFINED COMMAND.")
-##### ‣ Run Time:
+##### ‣ Main_Menue: --: Run Time.
 ![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
 ##### ‣ The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.<br/>
-‣ let's first explain CONFIG_COM command:<br/>
-## ∙ Command : CONFIG_COM<br/>
-##### ‣ Code:
-	#*******COM PORT FUNCTIONS********#        
-	def comConfig():
-    	print(50*'-',"\n\t",ser.port, "C O N F I G  B O A R D\n")
-    	while True:
-        	cmd= input("\nPY_DEBUG: COMMAND LIST:\
-                    	\n\tCHANGE_COM : TO CHANGE COM PORT.\
-                    	\n\tCHANGE_BAUD : TO CHANGE BAUDRATE.\
-                    	\n\tRETURN : TO RETURN TO MAIN MENUE.\
-                    	\n\nYOUR COMMAND IS : ")
-        	if cmd == "CHANGE_COM":
-            		ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
-        	elif cmd == "CHANGE_BAUD":
-            		ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
-        	elif cmd == "RETURN":
-            		break;
-        	else:
-            		print("PY_DEBUG: UNDEFINED COMMAND!!")
-##### ‣ Run time:
-![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
-### ◦ Command : CHANGE_COM <br/>
-     #To change the com port, as an input from the user.
-     ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
-### ◦ Command : CHANGE_BAUD <br/>
-     #To change the Baudrate of the com port, as an input from the user.
-     ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
-### ◦ Command : RETURN <br/> 
-     #Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
-     break
 ## ∙ Command : OPEN_PORT 
 #### <img align="right" src="https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG">
 ##### ‣ Firstly, open the selected com port.<br/>
@@ -216,13 +257,72 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ##### ‣ Now our Bootloader is waiting for new command to receiver from USART.<br/>
 ##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
 ##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
-## ◦ III.2.3 Python Predefined command : BOOTLOADER FUNCTIONS
-##### ‣ BLD_LIST : call BLD_CMD_LIST() Function that send char 'A' to Bootloader and receive the response which is the Bootloader command list we defined in Bootloader code.
+
+</details>
+
+## ◦ III.2.4 Python Predefined command : BOOTLOADER FUNCTIONS
+<details>
+<summary>expand/compress</summary>
+	
+### ◦ Command : BLD_LIST  
+        # Calls BLD_CMD_LIST() Function that send char 'A' to Bootloader 
+	# and receive the response which is the Bootloader command list we defined in Bootloader code.
 	def BLD_CMD_LIST():
     		print("PY_DEBUG: BLD COMMANDS LIST CMD IS SENT")
     		ser.write('A'.encode('ascii'))
     		read_string()
-##### ‣ BLD_LIST : Run Time.
+##### ‣ BLD_LIST : --: Run Time.
 ![22](https://user-images.githubusercontent.com/66730765/105487504-e6273880-5cb8-11eb-9a97-387df0eaa628.PNG)
-###### The response is a list of commands defined in Bootloader.
-
+###### The response -In the Box- is a list of commands defined in Bootloader.
+### ◦ Command : CMD  
+#### CMD --: Implementation: 
+	# Used to write the hex byte manually to transmit it Bootloader through USART.
+	elif cmd == "CMD":
+            co = input("ENTER COMMAND MANUALLY: ")
+            ser.write(bytearray.fromhex(co))
+            read_string()
+##### CMD --: RUN TIME
+![Screenshot (4)](https://user-images.githubusercontent.com/66730765/105506202-7756d900-5cd2-11eb-9a8e-69baf3d3d117.png)
+### ◦ Command : RETURN
+	# Just breaks the while loop and return the MAIN MENUE.
+	elif cmdB == "RETURN":
+            break
+### ◦ Command : BLD_UPLOAD
+####  Calls BLD_CMD_UPLOAD() Function, that's used to:<br/>
+##### 1- Send 'U' byte to Bootloader so that the Bootloader gets ready to receive new file.
+##### 2- Read the .txt file we created above in the Application Code, so we have to copy the outputArray.txt file and paste it in the Python folder.
+##### 3- Parse the .txt file and collect the hex bytes in a list.
+##### Note: From here we'll need to explain the thrird module we used in the code >> from TXT_FILE_HANDLER import *
+##### 4- Transmit this list through USART to the Bootloader in the AVR.
+	
+## COM BOARD function:
+	def comBoard():
+    		print(50*'-',"\n\t",ser.port, "S E R I A L  B O A R D\n")
+    		print("PY_DEBUG: RESET THE MCU")
+    		read_string()
+   		while True:        
+        	    	cmdB = input("\nPY_DEBUG: COMMAND LIST:\
+                     		\n\tBLD_LIST : TO SEE BLD LIST COMMAND.\
+                     		\n\tBLD_FLASH : TO FLASH APP CODE FROM BLD COMMAND.\
+                     		\n\tBLD_UPLOAD : TO UPLOAD NEW APP CODE BYTES TO BLD.\
+                     		\n\tCMD : TO SEND MANUAL COMMAND.\
+                     		\n\tRETURN : TO RETURN TO MAIN MENUE.\
+                     		\n\nYOUR COMMAND IS: ")
+        		if cmdB == "BLD_LIST":
+            		BLD_CMD_LIST()
+        		elif cmdB == "BLD_FLASH":
+            		BLD_CMD_FLASH()
+        		elif cmdB == "BLD_UPLOAD":
+            		BLD_CMD_UPLOAD()
+        		elif cmd == "CMD":
+            		co = input("ENTER COMMAND MANUALLY: ")
+            		ser.write(bytearray.fromhex(co))
+            		read_string()    
+        		elif cmdB == "RETURN":
+            			break
+        		else:
+            			print("PY_DEBUG: UNDEFINED COMMAND.")
+				
+</details>
+</details>
+</details>
