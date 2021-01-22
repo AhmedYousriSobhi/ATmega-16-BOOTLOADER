@@ -52,7 +52,12 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![13](https://user-images.githubusercontent.com/66730765/105467150-f251cc80-5c9d-11eb-85b4-fa0c9fec7d0c.PNG)
 ##### To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()
 #### 2- Display MAIN MENUE Get Command from User:
-CODE: 
+##### CODE: 
 ![15](https://user-images.githubusercontent.com/66730765/105471060-02b87600-5ca3-11eb-9a1e-a9d0bd850c5e.PNG)
-Run Time:
+##### Run Time:
 ![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
+##### The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.
+##### let's first explain CONFIG_COM command:
+![16](https://user-images.githubusercontent.com/66730765/105472343-7f981f80-5ca4-11eb-99b9-fc8bc75023d0.PNG)
+![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
+
