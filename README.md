@@ -122,14 +122,23 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
     	ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
     	ser.close()
     	print("PY_DEBUG : SERIAL PORT :\n", ser)
-##### ‣ The code lines in the BLUE-BOX is to get all connected com ports and print them, so that when we connect TTL-USB to our PC/LAPTOP, we get the com number.<br/>
+##### ‣ These code lines are used to get all connected com ports and print them, so that when we connect TTL-USB to our PC/LAPTOP, we get the com number.<br/>
+	ports = serial.tools.list_ports.comports()
+    	print("PY_DEBUG: LIST OF CONNECTED COM PORTS :")
+    	for port, desc, hwid in sorted(ports):
+            	print("{}: {} [{}]".format(port, desc, hwid))
 ##### ‣ Run Time: 
 ![12](https://user-images.githubusercontent.com/66730765/105466210-963a7880-5c9c-11eb-88ef-58d202f13f63.PNG)
 ##### ‣ In my case, the TTL-USB is COM4<br/>
 ![12](https://user-images.githubusercontent.com/66730765/105466316-b833fb00-5c9c-11eb-8613-75c924bc25d9.PNG)
-##### ‣ In the GREEN-BOX: we get the com number in the while loop and check for spelling "COM" word-key in the input. So the user should input: COM4 then press enter.<br/>
+##### ‣ From these lines we get the com number in the while loop and check for spelling "COM" word-key in the input. So the user should input: COM4 then press enter.<br/>
+	keyword_com = 'COM'
+    	while True:
+        	ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+        	if keyword_com in ser.port :
+            	break;
 ‣ Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
-![13](https://user-images.githubusercontent.com/66730765/105467150-f251cc80-5c9d-11eb-85b4-fa0c9fec7d0c.PNG)
+![25](https://user-images.githubusercontent.com/66730765/105495480-e6c5cc00-5cc4-11eb-81f9-d580ac4c11e2.png)
 ##### ‣ To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()<br/>
 ## ◦ III.2.2- Display MAIN MENUE Get Command from User:<br/>
 ##### ‣ CODE: 
