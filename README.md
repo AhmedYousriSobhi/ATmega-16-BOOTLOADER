@@ -212,7 +212,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ##### ‣ As you can see, there are two debug-texter here: <br/>
 ∙ PY_DEBUG : is from Python script.<br/>
 ∙ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
-![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)<br/>
+####![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)<br/>
 ##### ‣ Now our Bootloader is waiting for new command to receiver from USART.<br/>
 ##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
 ##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
