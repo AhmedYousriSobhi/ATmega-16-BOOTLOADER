@@ -26,7 +26,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)<br/>
 
-#### I.2.3- The Hex file Openned in Notepad++: <img align="right" width="600" height="600" src="https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG">	
+#### I.2.3- The Hex file Openned in Notepad++: <img align="right" width="400" height="400" src="https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG">	
 	:100000000C942A000C943F000C943F000C943F0089
 	:100010000C943F000C943F000C943F000C943F0064
 	:100020000C943F000C943F000C943F000C943F0054
