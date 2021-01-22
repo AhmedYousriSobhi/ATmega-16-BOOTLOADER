@@ -45,7 +45,8 @@ I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generate
 	:10010E0020424F4F544C4F4144455220434F44459B
 	:02011E000A00D5
 	:00000001FF
-![3](https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG)<br/>
+<img align="right" src="https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG">	
+
 #### I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
 ##### Note: The C code github link: https://github.com/AhmedYousriSobhi/Hex-To-array-txt <br/>
 #### I.2.5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
