@@ -207,17 +207,21 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
         	print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
         	comBoard()
 ##### ‣ if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
+##### ‣ MCU RESET:
 ![20](https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG)<br/>
 ##### ‣ As you can see, there are two debug-texter here: <br/>
-######              ∙ PY_DEBUG : is from Python script.<br/>
-######              ∙ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
+∙ PY_DEBUG : is from Python script.<br/>
+∙ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
 ![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)<br/>
 ##### ‣ Now our Bootloader is waiting for new command to receiver from USART.<br/>
-##### ‣ The " b' " character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
+##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
 ##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
-## ◦ III.2.3 Python Predefined command :
+## ◦ III.2.3 Python Predefined command : BOOTLOADER FUNCTIONS
 ##### ‣ BLD_LIST : call BLD_CMD_LIST() Function that send char 'A' to Bootloader and receive the response which is the Bootloader command list we defined in Bootloader code.
-![21](https://user-images.githubusercontent.com/66730765/105487130-49fd3180-5cb8-11eb-8731-5347098d07f9.PNG)<br/>
+	def BLD_CMD_LIST():
+    		print("PY_DEBUG: BLD COMMANDS LIST CMD IS SENT")
+    		ser.write('A'.encode('ascii'))
+    		read_string()
 ##### ‣ BLD_LIST : Run Time.
 ![22](https://user-images.githubusercontent.com/66730765/105487504-e6273880-5cb8-11eb-9a97-387df0eaa628.PNG)
 ###### The response is a list of commands defined in Bootloader.
