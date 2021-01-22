@@ -1,14 +1,20 @@
 # ATmega-16-BOOTLOADER
 
 #### bootloader designed and developed for ATmega-16 to upload and flash new app code into the flash memory using Python script to communicate with the bootloader.
-#### Note: Used Atmega-16 frequence is 1 MHZ, so i the cpu frq changed , just change what is depended like USART Baudrate value.
+#### Notes: <br/>
+ - Used Atmega-16 frequence is 1 MHZ, so if you want to change the cpu frq - like add crystal-, just change what is depended like USART Baudrate value.<br/>
+ - The used program for AVR is Atmel studio, you can use whatever you like as long as it compiles your project and generate the hex file code.<br/>
+ - Hex file uploading to AVR through AVRDUDESS.<br/>
+#### I will try to explain as much as i can, so you could design yout own code, and learn something.<br/>
 #### This project is divided into three part:
 
-# I- Application Code
+# I- Application Code Section
 <details>
 <summary>expand/compress</summary>
 
-#### I just wrote a simple UART application code that just transmit two string messages over USART channel.
+#### I just wrote a simple UART application code that just transmit two string messages over USART channel.<br/>
+That's to make sure we flashed the app code successfully into flash memory and the app code is running now and printing these messages.
+### Hello from App: --: CODE.    
     int main(void)
     {
       USART_Init(12); // setting baudrate to 4800
@@ -18,14 +24,24 @@
 		  USART_Transmit_Msg((uint8_t *)"YOU HAVE DONE YOUR FIRST BOOTLOADER CODE\n");
       }
     }
-That's to make sure we flashed the app code successfully into flash memory and the app code is running now.
+#### I assummed that you know to use USART peripheral in AVR. Even if you are not, you can simply use the functions definition that are written inside the datasheet. you can find USART_Init(), USART_Transmit() and USART_Recieve() funciton, that's what you will need for this project. 
+#### In addition to a simply USART_Tranmsit_mesg function to transmit a string, like the code below, the function is just taking a uint8_t pointer that carry the char of the string message and increment that pointer until '\n' char, or you could simply use '\0' as every string is ended with '\0'. Then transmit one by one to USART_transmit() function.
+	void USART_Transmit_Msg(uint8_t *word )
+	{
+		uint8_t index = 0;
+		while(word[index] != '\n')
+		{
+			USART_Transmit(word[index++]);
+		}
+		USART_Transmit('\n');	
+	}
 
 ## I.1-  USART Configuration:<br/>
 Baudrate = 4800 ,parity = None ,Stop Bit = One
 
 ## I.2-  HEX File of APP CODE:	
-I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated.<br/>
-I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
+I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated when we make build for the project.<br/>
+I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like the image below.
 
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)<br/>
 
@@ -52,8 +68,15 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 	:02011E000A00D5
 	:00000001FF
 
-#### I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
-##### Note: The [C code github link](https://github.com/AhmedYousriSobhi/Hex-To-array-txt)  <br/>
+#### I.2.4- Using C Parsing code "HEX-To-Array" to extract the Data Bytes.<br/>
+##### Note: 
+ - The [C code github link](https://github.com/AhmedYousriSobhi/Hex-To-array-txt)  <br/>
+ - First you need to understand [Intel Hex Format](https://en.wikipedia.org/wiki/Intel_HEX)
+ - This code is simple just open the hex file: 
+   - Reads every line byte by byte.
+   - Check the number of data bytes in this line and reads these data.
+   - Store these data in the output txt file which i named OutputArray.txt and fill the reset of bytes by 0xFF until the code size is equivlent to const integer * PAGE_SIZE in ATmega-16. The Page size in AVR is 128 bytes = 64 word.
+   - The OutputArray.txt file contains the Data bytes of the Application code, Code size, and number of pages needed for this code in the flash memory.
 #### I.2.5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)<br/>
 #### I.2.6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
@@ -90,10 +113,12 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 	#define NO_OF_PAGES 3
 
 ##### The C parsing code is designed so it takes the HEX file and output the txt file in array hex bytes format, Code size in bytes and number of pages in flash memory. 
+### One Last step here is to take a copy of OutputArray.txt file as we'll need this file in the coming Python Stage.
+### So right now let's jump to the Bootloader Section and contiune this journey.
 
 </details>
 
-# II- Bootloader Code
+# II- Bootloader Code Section
 <details>
 <summary>expand/compress</summary>
 	
@@ -102,25 +127,29 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 
 </details>
 
-# III- Python Script
+# III- Python Script Section
 <details>
 <summary>expand/compress</summary>
 	
-## • III.1 This Script is used to
+### The Idea here, Insted of using a Terminal - whatever was the terminal: Atmel studio terminal, Arduino IDE,..etc - to communicate with the bootloader through COM PORT (USART), we will write a python script for a program that a user can use even if he/she does not know the bootloader commands to talk to it directly.
+### So we'll try to make this program as friendly as possible for the user.
+### Another thing we may need is to send the new hex Application Code to bootloader through USART, so typing byte by byte for through Serial Terminal will not be humanly at all. That's why it would be best to make a program takes out hex code and send those data bytes in timeless process.
+### Other solution but not efficient is that we take the array hex bytes we got from OutputArray.txt file and place it in the Bootloader code before uploading and Flashing the bootloader into out AVR. But this way means every time we want to upload new app code to bootloader, we have to flash the code of the bootloader. This is worthless and meaningless as what is the bootloader benefits now.
 	
-##### ‣ 1- Talk to the Bootloader.<br/>
-‣ 2- Read Hex Bytes from the OutputArray.txt file - from APP Code Stage - and Transmit those bytes through USART to Boodloader.
+## III.1 This Script is used to :
+ - 1- Talk to the Bootloader.<br/>
+ - 2- Read Hex Bytes from the OutputArray.txt file - from APP Code Section - and Transmit those bytes through USART to Boodloader.
 
-### • III.2 LET'S EXPLAIN THE SCRIPT	
-## ◦ III.2.1  First The imported modules:<br/>	
-##### ‣ Three Modules we imported, the third one was created and designed as we will need it in a next step, so i'll explain it later when we will need it. 
+### Now LET'S EXPLAIN THIS SCRIPT in details:	
+## III.2  First The imported modules:<br/>	
+#### Three Modules were imported, the third one was created and designed as we will need it in a next step, so i'll explain it later when we will need it. 
 	import serial
 	import serial.tools.list_ports
 	from TXT_FILE_HANDLER import *
-##### ‣ Modules: "serial" is used to create a serial com port object, and configure its name, baudrate, parity, stop bit ,... etc <br/>
-‣ Modules: "serial.tools.list_ports" is used to get all connected com ports on your os device PC/LAPTOP.
-	
-## ◦ III.2.2  PORT CONFIGURATION	
+ - Modules: "serial" is used to create a serial COM PORT object, and configure COM PORT name, baudrate, parity, stop bit ,... etc <br/>
+ - Modules: "serial.tools.list_ports" is used to get all connected com ports on your os device PC/LAPTOP.
+### So let's see how to create an object for COM PORT.	
+## ◦ III.3  PORT CONFIGURATION	
 ##### ‣ Port Configuration: --: Implementation.	
 	#*********PORT CONFIGURATION**************#
 	# if this the main py file to run ,
@@ -139,16 +168,22 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
     	ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
     	ser.close()
     	print("PY_DEBUG : SERIAL PORT :\n", ser)
-##### ‣ These code lines are used to get all connected com ports and print them, so that when we connect TTL-USB to our PC/LAPTOP, we get the com number.<br/>
+#### Let's take it easy and split these code lines into pieces blocks of code.
+ - In this block, used to get all connected com ports and print them, so that when we connect TTL-USB to our PC/LAPTOP, we know the com number.
+ - Instead of checking through windows manger for COM PORT connected (in case you are using Windows).
+####
 	ports = serial.tools.list_ports.comports()
     	print("PY_DEBUG: LIST OF CONNECTED COM PORTS :")
     	for port, desc, hwid in sorted(ports):
             	print("{}: {} [{}]".format(port, desc, hwid))
+#### Let's see the run time of these codes:		
 ##### ‣ Port Configuration: --: Run Time. 
 ![12](https://user-images.githubusercontent.com/66730765/105466210-963a7880-5c9c-11eb-88ef-58d202f13f63.PNG)
 ##### ‣ In my case, the TTL-USB is COM4<br/>
 ![12](https://user-images.githubusercontent.com/66730765/105466316-b833fb00-5c9c-11eb-8613-75c924bc25d9.PNG)
-##### ‣ From these lines we get the com number in the while loop and check for spelling "COM" word-key in the input. So the user should input: COM4 then press enter.<br/>
+ - From these Code block below we want the user to input the COM PORT number.
+ - Using while loop to check for spelling "COM" word-key in the input. So the user should input: COM4 then press enter.<br/>
+####
 	keyword_com = 'COM'
     	while True:
         	ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
@@ -189,7 +224,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
      # Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
      break
 
-## ◦ III.2.3- Display MAIN MENUE Get Command from User:<br/>
+## ◦ III.4- Display MAIN MENUE Get Command from User:<br/>
 	
 ##### ‣ Main_Menue: --:Implementation. 
 	#Get Command From User.
@@ -236,7 +271,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
 ##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
 
-## ◦ III.2.4 Python Predefined command : BOOTLOADER FUNCTIONS
+## ◦ III.5 Python Predefined command : BOOTLOADER FUNCTIONS
 ### ◦ Command : BLD_LIST  
         # Calls BLD_CMD_LIST() Function that send char 'A' to Bootloader 
 	# and receive the response which is the Bootloader command list we defined in Bootloader code.
