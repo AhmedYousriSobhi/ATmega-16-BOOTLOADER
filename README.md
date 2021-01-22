@@ -58,13 +58,15 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
 ##### ◦ The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.
 ##### ◦ let's first explain CONFIG_COM command:
-##### ◦ Code:
+##### ◦ Command : CONFIG_COM
+###### ◦ Code:
 ![16](https://user-images.githubusercontent.com/66730765/105472343-7f981f80-5ca4-11eb-99b9-fc8bc75023d0.PNG) 
-##### ◦ Run time:
+###### ◦ Run time:
 ![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
-##### ◦ RETURN command just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
+##### ◦ Command RETURN 
+###### Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
 ![18](https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG)
-##### ◦ OPEN_PORT Command: 
+##### ◦ Command : OPEN_PORT 
 ######           Firstly, open the selected com port.
 ######           Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.
 ######           Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
@@ -75,3 +77,13 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ######              ◦ PY_DEBUG : is from Python script.
 ######              ◦ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
 ![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)
+##### ◦ Now our Bootloader is waiting for new command to receiver from USART.
+##### ◦ The " b' " character before the BLD_DEBUG message means that the printed message was recieved in bytes in python. 
+##### ◦ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.
+##### ◦ Python Predefined command :
+###### BLD_LIST : call BLD_CMD_LIST() Function that send char 'A' to Bootloader and receive the response which is the Bootloader command list we defined in Bootloader code.
+![21](https://user-images.githubusercontent.com/66730765/105487130-49fd3180-5cb8-11eb-8731-5347098d07f9.PNG)
+###### BLD_LIST : Run Time.
+![22](https://user-images.githubusercontent.com/66730765/105487504-e6273880-5cb8-11eb-9a97-387df0eaa628.PNG)
+###### The response is a list of commands defined in Bootloader.
+
