@@ -2,7 +2,6 @@ import serial
 import serial.tools.list_ports
 from TXT_FILE_HANDLER import *
 #--------------------------------------------#
-ser = serial.Serial()
 #*******COM PORT FUNCTIONS********#        
 def comConfig():
     print(50*'-',"\n\t",ser.port, "C O N F I G  B O A R D\n")
@@ -76,6 +75,7 @@ def comBoard():
                       \n\tBLD_LIST : TO SEE BLD LIST COMMAND.\
                       \n\tBLD_FLASH : TO FLASH APP CODE FROM BLD COMMAND.\
                       \n\tBLD_UPLOAD : TO UPLOAD NEW APP CODE BYTES TO BLD.\
+                      \n\tCMD : TO SEND MANUAL COMMAND.\
                       \n\tRETURN : TO RETURN TO MAIN MENUE.\
                       \n\nYOUR COMMAND IS: ")
         if cmdB == "BLD_LIST":
@@ -84,15 +84,21 @@ def comBoard():
             BLD_CMD_FLASH()
         elif cmdB == "BLD_UPLOAD":
             BLD_CMD_UPLOAD()
+        elif cmd == "CMD":
+            co = input("ENTER COMMAND MANUALLY: ")
+            ser.write(bytearray.fromhex(co))
+            read_string()    
         elif cmdB == "RETURN":
             break
-
+        else:
+            print("PY_DEBUG: UNDEFINED COMMAND.")
           
 #--------------------------------------------#
 #*********PORT CONFIGURATION**************#
 # if this the main py file to run ,
 # so if another program run , it will not run the code inside this if.          
 if __name__ == '__main__':
+    ser = serial.Serial()
     ports = serial.tools.list_ports.comports()
     print("PY_DEBUG: LIST OF CONNECTED COM PORTS :")
     for port, desc, hwid in sorted(ports):
@@ -116,7 +122,6 @@ if __name__ == '__main__':
                     \n\tOPEN_PORT : TO OPEN COM PORT SELECTED.\
                     \n\tCLOSE_PORT : TO CLOSE COM PORT.\
                     \n\tCONFIG_COM : TO CHANGE COM PORT.\
-                    \n\tCMD : TO SEND MANUAL COMMAND.\
                     \n\nYOUR COMMAND IS : ")
         if cmd == "OPEN_PORT" :
             ser.open()
@@ -128,9 +133,5 @@ if __name__ == '__main__':
         elif cmd == "CONFIG_COM":
             print("PY_DEBUG: ENTERING CONFIGURATION COM BOARD.")
             comConfig()
-        elif cmd == "CMD":
-            co = input("ENTER COMMAND: ")
-            ser.write(bytearray.fromhex(co))
-            read_string()
         else:
             print("PY_DEBUG: UNDEFINED COMMAND.")
