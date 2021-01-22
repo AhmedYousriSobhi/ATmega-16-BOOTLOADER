@@ -6,13 +6,13 @@
 
 # I- Application Code
 #### I just wrote a simple UART application code that just transmit two string messages over USART channel.
-![1](https://user-images.githubusercontent.com/66730765/105389186-3acaa500-5c20-11eb-9110-2cb2aead450d.PNG)
-#### That's to make sure we flashed the app code successfully into flash memory and the app code is running now.
+![1](https://user-images.githubusercontent.com/66730765/105389186-3acaa500-5c20-11eb-9110-2cb2aead450d.PNG)<br/>
+That's to make sure we flashed the app code successfully into flash memory and the app code is running now.
 
-## I.1 USART Configuration:
+## I.1-  USART Configuration:<br/>
 Baudrate = 4800 ,parity = None ,Stop Bit = One
 
-## I.2 HEX File of APP CODE:
+## I.2-  HEX File of APP CODE:
 I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated.<br/>
 I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.<br/>
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)
