@@ -47,8 +47,7 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![12](https://user-images.githubusercontent.com/66730765/105466210-963a7880-5c9c-11eb-88ef-58d202f13f63.PNG)
 ##### In my case, the TTL-USB is COM4
 ![12](https://user-images.githubusercontent.com/66730765/105466316-b833fb00-5c9c-11eb-8613-75c924bc25d9.PNG)
-##### In the GREEN-BOX: we get the com number in the while loop and check for spelling "COM" word-key in the input.
- So the user should input: COM4 then press enter.
+##### In the GREEN-BOX: we get the com number in the while loop and check for spelling "COM" word-key in the input. So the user should input: COM4 then press enter.
 ##### Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
 ![13](https://user-images.githubusercontent.com/66730765/105467150-f251cc80-5c9d-11eb-85b4-fa0c9fec7d0c.PNG)
 ##### To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()
