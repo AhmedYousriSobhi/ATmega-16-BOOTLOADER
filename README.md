@@ -14,17 +14,17 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 
 ## I.2-  HEX File of APP CODE:
 I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generated.<br/>
-I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
+#### I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)<br/>
-I.2.3- The Hex file Openned in Notepad++:
+#### I.2.3- The Hex file Openned in Notepad++:
 ![3](https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG)<br/>
-I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
+#### I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
 ##### Note: The C code github link: https://github.com/AhmedYousriSobhi/Hex-To-array-txt <br/>
-I.2.5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
+#### I.2.5-Take a copy of the hex file and past it inside the same folder as HexToArray C code.
 ![4](https://user-images.githubusercontent.com/66730765/105391151-7e261300-5c22-11eb-8cc7-8ee8db397352.PNG)<br/>
-I.2.6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
+#### I.2.6- Using CMD, Run the line:   hextoarray.exe UART_APPLICATION.hex
 ![5](https://user-images.githubusercontent.com/66730765/105391152-7f574000-5c22-11eb-97a9-a473c2b624cc.PNG)<br/>
-I.2.7- The Output File is named : OutputArray.txt, and looks like:
+#### I.2.7- The Output File is named : OutputArray.txt, and looks like:
 ![7](https://user-images.githubusercontent.com/66730765/105391691-0c9a9480-5c23-11eb-8a04-d221ee01afa5.PNG)<br/>
 ##### The C parsing code is designed so it takes the HEX file and output the txt file in array hex bytes format, Code size in bytes and number of pages in flash memory. 
 
