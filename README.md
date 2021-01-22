@@ -6,7 +6,15 @@
 
 # I- Application Code
 #### I just wrote a simple UART application code that just transmit two string messages over USART channel.
-![1](https://user-images.githubusercontent.com/66730765/105389186-3acaa500-5c20-11eb-9110-2cb2aead450d.PNG)<br/>
+    int main(void)
+    {
+      USART_Init(12); // setting baudrate to 4800
+      while (1) 
+      {
+		  USART_Transmit_Msg((uint8_t *)"HELLO FROM APPLICATION\n");
+		  USART_Transmit_Msg((uint8_t *)"YOU HAVE DONE YOUR FIRST BOOTLOADER CODE\n");
+      }
+    }
 That's to make sure we flashed the app code successfully into flash memory and the app code is running now.
 
 ## I.1-  USART Configuration:<br/>
