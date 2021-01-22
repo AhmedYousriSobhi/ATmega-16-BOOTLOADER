@@ -33,10 +33,10 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![9](https://user-images.githubusercontent.com/66730765/105463210-638e8100-5c98-11eb-82fe-266756800d8d.PNG)
 
 ## III- Python Script
-### •This Script is used to
+### • This Script is used to
 #####                  1- Talk to the Bootloader.
 #####                  2- Read Hex Bytes from the OutputArray.txt file - from APP Code Stage - and Transmit those bytes through USART to Boodloader.
-### •LET'S EXPLAIN THE SCRIPT
+### • LET'S EXPLAIN THE SCRIPT
 #### 1- first we import the modules:
 ![10](https://user-images.githubusercontent.com/66730765/105463213-64271780-5c98-11eb-9849-af1733e98944.PNG)
 ##### ◦ Modules: "serial" is used to create a serial com port object, and configure its name, baudrate, parity, stop bit ,... etc 
@@ -64,3 +64,14 @@ Baudrate = 4800 ,parity = None ,Stop Bit = One
 ![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
 ##### ◦ RETURN command just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
 ![18](https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG)
+##### ◦ OPEN_PORT Command: 
+######           Firstly, open the selected com port.
+######           Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.
+######           Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
+![19](https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG)
+##### if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
+![20](https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG)
+##### As you can see, there are two debug-texter here: 
+######              ◦ PY_DEBUG : is from Python script.
+######              ◦ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
+![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)
