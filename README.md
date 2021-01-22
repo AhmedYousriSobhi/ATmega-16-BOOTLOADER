@@ -198,15 +198,14 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
      #Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
      break
 ## ∙ Command : OPEN_PORT 
-#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105473066-588e1d80-5ca5-11eb-9f5b-3ed6904e059a.PNG">
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG">
 ##### ‣ Firstly, open the selected com port.<br/>
 ##### ‣ Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
 ##### ‣ Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
 	if cmd == "OPEN_PORT" :
-        		ser.open()
-        		print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
-        		comBoard()
-![19](https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG)<br/>
+        	ser.open()
+        	print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
+        	comBoard()
 ##### ‣ if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
 ![20](https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG)<br/>
 ##### ‣ As you can see, there are two debug-texter here: <br/>
