@@ -25,6 +25,7 @@ I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generate
 #### I.2.2- The Generated APP CODE Hex file is located inside the Debug folder.
 ![2](https://user-images.githubusercontent.com/66730765/105389913-1de2a180-5c21-11eb-9e67-dc6b62e83959.PNG)<br/>
 #### I.2.3- The Hex file Openned in Notepad++:
+<img align="right" src="https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG">	
 	:100000000C942A000C943F000C943F000C943F0089
 	:100010000C943F000C943F000C943F000C943F0064
 	:100020000C943F000C943F000C943F000C943F0054
@@ -45,7 +46,6 @@ I.2.1- We need to extract the data Hex Bytes from the APP CODE Hex file generate
 	:10010E0020424F4F544C4F4144455220434F44459B
 	:02011E000A00D5
 	:00000001FF
-<img align="right" src="https://user-images.githubusercontent.com/66730765/105390530-d01a6900-5c21-11eb-9639-eaee9fed3f2d.PNG">	
 
 #### I.2.4- Using C Parsing code Code "HEX-To-Array" the extract the Data Bytes.<br/>
 ##### Note: The C code github link: https://github.com/AhmedYousriSobhi/Hex-To-array-txt <br/>
