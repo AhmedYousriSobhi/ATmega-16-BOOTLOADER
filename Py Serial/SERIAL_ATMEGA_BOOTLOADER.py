@@ -60,7 +60,6 @@ def BLD_CMD_UPLOAD():
     ser.write(str(NumOfPage).encode('ascii'))
     while i<CODE_SIZE:
         ser.write(app_code[i])
-        #read_string()
         print(i)
         i=i+1
     read_string()
@@ -84,7 +83,7 @@ def comBoard():
             BLD_CMD_FLASH()
         elif cmdB == "BLD_UPLOAD":
             BLD_CMD_UPLOAD()
-        elif cmd == "CMD":
+        elif cmdB == "CMD":
             co = input("ENTER COMMAND MANUALLY: ")
             ser.write(bytearray.fromhex(co))
             read_string()    
