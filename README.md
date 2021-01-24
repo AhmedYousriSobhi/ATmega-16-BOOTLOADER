@@ -394,7 +394,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
 #### <img align="right" width="460" height="300" src="https://user-images.githubusercontent.com/66730765/105630650-0a1e8180-5e53-11eb-982c-6120bdbb7c91.png"><br><br>
 
 ### ◦ Command : BLD_FLASH
-#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105632434-bbc1b080-5e5b-11eb-878b-d91f05219079.png">
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105631360-d04f7a00-5e56-11eb-9985-f3e5a592a49c.png">
 ####
  - Now the last thing to do is to command the Bootloader to flash this APP CODE it's just received.
  - Bootloader sends message that it start flashing the new APP CODE into flash memory.
