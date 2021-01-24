@@ -189,12 +189,45 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
         	ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
         	if keyword_com in ser.port :
             	break;
-‣ Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800
+‣ Next, asking for the Baudrate. The baudrate i use for ATmega-16 is 4800 with intenal 1 MHZ CPU frq.
 ![25](https://user-images.githubusercontent.com/66730765/105495480-e6c5cc00-5cc4-11eb-81f9-d580ac4c11e2.png)
-##### ‣ To make no error if we try to open an already openned port, so first thing to do is to close the selected com port using : ser.close()<br/>
-### ◦ let's first explain CONFIG_COM command:<br/>
+##### ‣ In case, we try to open an already openned port, so to make no error, The first thing to do is to close the selected com port using : ser.close()<br/>
+## ◦ III.4- Display MAIN MENUE Get Command from User:<br/>
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG">
+##### 
+    #Get Command From User.
+    cmd = '0'
+    while(1):
+        print(50*'-','\n\t\tM A I N  M E N U E\n')
+        cmd= input("\nPY_DEBUG: COMMAND LIST:\
+                    \n\tOPEN_PORT : TO OPEN COM PORT SELECTED.\
+                    \n\tCLOSE_PORT : TO CLOSE COM PORT.\
+                    \n\tCONFIG_COM : TO CHANGE COM PORT.\
+                    \n\nYOUR COMMAND IS : ")
+        if cmd == "OPEN_PORT" :
+            	ser.open()
+            	print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
+            	comBoard()
+        elif cmd == "CLOSE_PORT":
+            	ser.close()
+            	print("PY_DEBUG: COM PORT IS CLOSED? ", not ser.is_open)
+        elif cmd == "CONFIG_COM":
+            	print("PY_DEBUG: ENTERING CONFIGURATION COM BOARD.")
+            	comConfig()
+        else:
+            	print("PY_DEBUG: UNDEFINED COMMAND.")
+
+
+##### ‣ The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.<br/>
+
+### ◦ let's first explain CONFIG_COM command:
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG">
 ## ∙ Command : CONFIG_COM<br/>
-##### ‣ comConfig: --:Implementation:
+
+ - From its name, it 's used to configure the com port like changing com port number and changing baudrate. 
+ - You can add more features like changing parity mode, stop bits number and another properites of USART Protocol.
+
+##### 
 	#*******COM PORT FUNCTIONS********#        
 	def comConfig():
     	print(50*'-',"\n\t",ser.port, "C O N F I G  B O A R D\n")
@@ -212,98 +245,51 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
             		break;
         	else:
             		print("PY_DEBUG: UNDEFINED COMMAND!!")
-##### ‣ comConfig: --: Run time:
-![17](https://user-images.githubusercontent.com/66730765/105472524-b9692600-5ca4-11eb-9d1a-eb8c9410a326.PNG)
-### ◦ Command : CHANGE_COM <br/>
-     # To change the com port, as an input from the user.
-     ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
-### ◦ Command : CHANGE_BAUD <br/>
-     # To change the Baudrate of the com port, as an input from the user.
-     ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
-### ◦ Command : RETURN <br/> 
-     # Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
-     break
 
-## ◦ III.4- Display MAIN MENUE Get Command from User:<br/>
-	
-##### ‣ Main_Menue: --:Implementation. 
-	#Get Command From User.
-    	cmd = '0'
-    	while(1):
-        	print(50*'-','\n\t\tM A I N  M E N U E\n')
-        	cmd= input("\nPY_DEBUG: COMMAND LIST:\
-                    	\n\tOPEN_PORT : TO OPEN COM PORT SELECTED.\
-                    	\n\tCLOSE_PORT : TO CLOSE COM PORT.\
-                    	\n\tCONFIG_COM : TO CHANGE COM PORT.\
-                    	\n\nYOUR COMMAND IS : ")
-        	if cmd == "OPEN_PORT" :
-            		ser.open()
-            		print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
-            		comBoard()
-        	elif cmd == "CLOSE_PORT":
-            		ser.close()
-            		print("PY_DEBUG: COM PORT IS CLOSED? ", not ser.is_open)
-        	elif cmd == "CONFIG_COM":
-            		print("PY_DEBUG: ENTERING CONFIGURATION COM BOARD.")
-            		comConfig()
-        	else:
-            		print("PY_DEBUG: UNDEFINED COMMAND.")
-##### ‣ Main_Menue: --: Run Time.
-![14](https://user-images.githubusercontent.com/66730765/105471067-03510c80-5ca3-11eb-914c-b78b8763dac6.PNG)
-##### ‣ The input command is checked in if-elif statements, so according to the input CMD, it's calling specific function.<br/>
+### ◦ Command : CHANGE_COM <br/>
+ - To change the com port, as an input from the user.
+####
+	elif cmd == "CHANGE_COM":
+		ser.port = input("PY_DEBUG: ENTER COM NUMBER : ")
+### ◦ Command : CHANGE_BAUD <br/>
+ - To change the Baudrate of the com port, as an input from the user.
+####
+	elif cmd == "CHANGE_BAUD":
+		ser.baudrate = int(input("PY_DEBUG: ENTER BAUDRATE : "))
+### ◦ Command : RETURN <br/> 
+ - Just breaks the while loop and get out of the comConfig function and returns to MAIN-MENUE
+####
+	elif cmd == "RETURN":
+        		break;
+
+### ◦ The Second command to explain is Open_port.
 ## ∙ Command : OPEN_PORT 
 #### <img align="right" src="https://user-images.githubusercontent.com/66730765/105474483-eddde180-5ca6-11eb-9cdc-ebb55183c204.PNG">
-##### ‣ Firstly, open the selected com port.<br/>
-##### ‣ Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
-##### ‣ Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
+##### ‣ What it realy do is that :
+ - Firstly, open the selected com port.<br/>
+ - Secondly, print the status of the com port: open/close using ser.is_open that return True if com port is opened successfully.<br/>
+ - Thirdly, Call the function comBoard(), That jumps to comBoard Menue.
+####
 	if cmd == "OPEN_PORT" :
         	ser.open()
         	print("PY_DEBUG: COM PORT IS OPENED? ", ser.is_open)
         	comBoard()
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG">
+####
 ##### ‣ if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
-##### ‣ MCU RESET:
-![20](https://user-images.githubusercontent.com/66730765/105475653-4661ae80-5ca8-11eb-971c-a1b27ec4f5bd.PNG)<br/>
+##### ‣ Let's Press the push button that connected to AVR RESET pin:
+
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG">
 ##### ‣ As you can see, there are two debug-texter here: <br/>
 ∙ PY_DEBUG : is from Python script.<br/>
 ∙ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
-#### ![20](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)<br/>
+
 ##### ‣ Now our Bootloader is waiting for new command to receiver from USART.<br/>
 ##### ‣ NOTE: The  b'  character before the BLD_DEBUG message means that the printed message was recieved in bytes in python.<br/> 
-##### ‣ In Python we have some predefined commands, just choose what to do, and if the user wants to write his own command manually, there is a command also for that.<br/>
-
-## ◦ III.5 Python Predefined command : BOOTLOADER FUNCTIONS
-### ◦ Command : BLD_LIST  
-        # Calls BLD_CMD_LIST() Function that send char 'A' to Bootloader 
-	# and receive the response which is the Bootloader command list we defined in Bootloader code.
-	def BLD_CMD_LIST():
-    		print("PY_DEBUG: BLD COMMANDS LIST CMD IS SENT")
-    		ser.write('A'.encode('ascii'))
-    		read_string()
-##### ‣ BLD_LIST : --: Run Time.
-![22](https://user-images.githubusercontent.com/66730765/105487504-e6273880-5cb8-11eb-9a97-387df0eaa628.PNG)
-###### The response -In the Box- is a list of commands defined in Bootloader.
-### ◦ Command : CMD  
-#### CMD --: Implementation: 
-	# Used to write the hex byte manually to transmit it Bootloader through USART.
-	elif cmd == "CMD":
-            co = input("ENTER COMMAND MANUALLY: ")
-            ser.write(bytearray.fromhex(co))
-            read_string()
-##### CMD --: RUN TIME
-![Screenshot (4)](https://user-images.githubusercontent.com/66730765/105506202-7756d900-5cd2-11eb-9a8e-69baf3d3d117.png)
-### ◦ Command : RETURN
-	# Just breaks the while loop and return the MAIN MENUE.
-	elif cmdB == "RETURN":
-            break
-### ◦ Command : BLD_UPLOAD
-####  Calls BLD_CMD_UPLOAD() Function, that's used to:<br/>
-##### 1- Send 'U' byte to Bootloader so that the Bootloader gets ready to receive new file.
-##### 2- Read the .txt file we created above in the Application Code, so we have to copy the outputArray.txt file and paste it in the Python folder.
-##### 3- Parse the .txt file and collect the hex bytes in a list.
-##### Note: From here we'll need to explain the thrird module we used in the code >> from TXT_FILE_HANDLER import *
-##### 4- Transmit this list through USART to the Bootloader in the AVR.
-	
-## COM BOARD function:
+##### ‣ Now we jumped to Com port Serial Board, where our python debuger shows us some command to use.
+##### ‣ In our Python script, we have some predefined commands, just choose what to do. And if the user wants to write his own command manually, there is a command also for that.<br/>
+#### Let's first see its code implementation.
+### COM BOARD implementation:
 	def comBoard():
     		print(50*'-',"\n\t",ser.port, "S E R I A L  B O A R D\n")
     		print("PY_DEBUG: RESET THE MCU")
@@ -330,5 +316,169 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
             			break
         		else:
             			print("PY_DEBUG: UNDEFINED COMMAND.")
-				
+## ◦ III.5 Predefined command : BOOTLOADER FUNCTIONS
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105628713-36cc9c00-5e47-11eb-883b-f626c82cc230.png">
+### ◦ Command : BLD_LIST  
+ - Calls BLD_CMD_LIST() Function that send char 'A' to Bootloader 
+ - Receive the response which is the Bootloader command list we defined in Bootloader code.
+#### 
+	def BLD_CMD_LIST():
+    		print("PY_DEBUG: BLD COMMANDS LIST CMD IS SENT")
+    		ser.write('A'.encode('ascii'))
+    		read_string()
+
+
+###### The response -In the Box- is a list of commands defined in Bootloader.
+
+### ◦ Command : CMD 
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105628785-a9d61280-5e47-11eb-9a29-d490167a39a1.png"> 
+ - Used to write the hex byte manually to transmit it Bootloader through USART.
+####
+	elif cmd == "CMD":
+            co = input("ENTER COMMAND MANUALLY: ")
+            ser.write(bytearray.fromhex(co))
+            read_string()
+
+### ◦ Command : RETURN
+ - Just breaks the while loop and return the MAIN MENUE.
+####
+	elif cmdB == "RETURN":
+            break
+### ◦ Command : BLD_UPLOAD
+##### <img align="right" src="https://user-images.githubusercontent.com/66730765/105629035-5fee2c00-5e49-11eb-9cfb-4816a3b73578.png">
+#### 
+- Calls BLD_CMD_UPLOAD() Function, that's used to:<br/>
+  - 1- Send 'U' byte to Bootloader so that the Bootloader gets ready to receive new HEX Bytes for APP CODE.
+  - 2- Our Python script starts reading the .txt file we created above in the Application Code Section, so we have to copy the outputArray.txt file and paste it in the Python script folder.
+  - 3- Parse the .txt file and collect the hex bytes in a list.
+  - Note: From here we'll need to explain the thrird module we used in the code >> from TXT_FILE_HANDLER import *
+  - 4- Then, Transmit App code list through USART to the Bootloader in the AVR.
+####
+	def BLD_CMD_UPLOAD():
+    		print("PY_DEBUG: BLD UPLOAD NEW COMMAND IS SENT")
+    		ser.write('U'.encode('ascii'))
+    		read_string()
+    		i = 0
+    		app_code = TXT_FILE_READ()
+    		BytesInPage = 128
+    		CODE_SIZE = len(app_code)
+    		NumOfPage = CODE_SIZE // BytesInPage
+    		print("PY_DEBUG: CODE SIZE = ",CODE_SIZE," , Num of Page = ", NumOfPage)
+    		ser.write(str(NumOfPage).encode('ascii'))
+    		while i<CODE_SIZE:
+        		ser.write(app_code[i])
+        		print(i)
+        		i=i+1
+    		read_string()
+#### So when we input the .txt file name, python script will read it and send bytes to AVR automatically. 
+#### Before explaining what this thrid module we imported is used for, Python code is waiting for the user to enter the .txt file name, which is OutputArray.txt , so let's ENTER IT!!.
+
+####
+ - Our Python debugger sends char 'U' to Bootloader, and waits for its response.
+ - Bootloader replys back with the cmd it has received, sending message that it received an upload command and sends its ack char 'A'.
+ - Now Python debugger waits for the user to enter the .txt file name.
+ - After entering OutputArray.txt, it jumped to the TXT_FILE_READ() function which return the list contains APP Code.
+ - Calculate the CODE SIZE and NUMBER OF PAGES, then printing these information.
+ - First it send the number of pages of the upcoming APP CODE to Bootloader.
+ - Then Starting sending the APP CODE List Byte by Byte, and print the index number of byte it sent - This is just for debugging, so you can comment this line - .
+ - After Finishing sending all the bytes, it waits for Bootloader to send back acknowlege that it received successfully.
+### Note:
+ - You would ask why we calculate the code size and number of pages again?
+   - That's because i simply in the parsing process done by python script, want to make easy in parsing and simply read the data bytes only.
+ - You would ask again, why we don't let python parse the .hex file instead of .txt file?
+   - The answer for that as i said upove in Application code section is that: if the user wants to upload its bootloader code with an array of APP Code embedded inside it, but i said it would does not have any meaning for the bootloader conept, as now you will simply just upload a code in different flash memory address and write another code in the flash memory and run it.
+ - This "Squeezed text (92 lines)" is just because there is a print for the list as i was testing the code and want to know how the list looks like, you can simply comment this print line inside the "TXT_FILE_HANDLER.py". 
+   
+#### <img align="left" width="450" height="300" src="https://user-images.githubusercontent.com/66730765/105630533-85cbfe80-5e52-11eb-8ae5-6dc5d9b07470.png">
+
+#### <img align="right" width="460" height="300" src="https://user-images.githubusercontent.com/66730765/105630650-0a1e8180-5e53-11eb-982c-6120bdbb7c91.png"><br><br>
+
+### ◦ Command : BLD_FLASH
+#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105632434-bbc1b080-5e5b-11eb-878b-d91f05219079.png">
+####
+ - Now the last thing to do is to command the Bootloader to flash this APP CODE it's just received.
+ - Bootloader sends message that it start flashing the new APP CODE into flash memory.
+ - From our code we programmed the bootloader code to jump to address 0 asm"jmp0" to run the Application Code.
+ - So now we see the messages we made in the Application code "HELLO FROM APPLICATION", This means our uploading and flashing have WORKED !!!!.
+ - From this stage our Pyhton Script becomes a Serial Monitor to read if any thing i sending from the application code in our ATmega-16.
+#### 
+    def BLD_CMD_FLASH():
+    	print("PY_DEBUG: BLD FLASH APP CODE CMD IS SENT")
+    	ser.write('F'.encode('ascii'))
+    	read_string()
+    	print("PY_DEBUG: BOOTLOADER IS OUT OF COMMUNICATION")
+    	read_string()
+
+## ◦ III.6 Predefined command : USART FUNCTIONS
+### To finish up this section, we have not take a look about the USART function we defined in the python script as we were using them in our other function.
+ - waitForDataRecieve :
+ 	- Used for waiting for any bytes coming to our com port.
+	- It's just a loop that wait untile something is received.
+	- Input : none.
+	- Output : none.
+	- So it does not reads the coming bytes.
+###
+	def waitForDataRecieve():
+    		print("PY_DEBUG: WAITING TO RECIEVE DATA")
+    		while ser.in_waiting == 0:
+       		pass
+ - read_byte :
+ 	- Used to read a bytes after waiting for any upcoming bytes.
+###
+	def read_byte():
+    		waitForDataRecieve()
+    		print(ser.read())
+- read_string :
+	- Used to read a string, which means reading bytes until it found a null character '\0'
+###
+	def read_string():
+    		waitForDataRecieve()
+    		while ser.in_waiting !=0:
+        		print(ser.read_until())
+### Until now i hope you don't find these funciton difficult, so let's jump to our last thing to explain here, the text file handler module we created.
+## ◦ III.7 Predefined Module : Txt file Handler "TXT_FILE_HANDLER.py"
+ - 1- Reads the file name from the user. the file name must have a ".txt" keyword in it to make sure the user entered the correct file format.
+ - 2- Opens our .txt file.
+ - 3- Creating an empty list to store the upcoming bytes which we are going to read.
+ - 4- Looping while reading a byte each time and check for the zero number in hex "0x--".
+ - 5- If the reading bytes is 0 then skip the 'x' and reads the rest two numbers and store then in the list.
+ - 6- Repeat this process untile we dound ';' or '}' .
+ - 7- Converting the numbers we read into hex format using function: bytearray.fromhex(list[index]).
+ - 8- Printing the new array for testing, so you can comment this line.
+ - 9- returning the list to the caller variable.
+ 
+ ####
+    def TXT_FILE_READ():
+    	while True:
+        	file_name = input("PY_DEBUG: ENTER TXT FILE NAME LIKE 'text.txt' : ")
+        	if ".txt" in file_name:
+            	break
+    	text = open(file_name)
+    	# Creating void array:
+    	app_code_list=[]
+    	index = 1
+    	counter = 0
+    	while True:
+        	temp = text.read(index)
+        	if( temp.isnumeric()): #to collect hex
+            	text.read(index)
+            	temp=text.read(index)
+            	temp+=text.read(index)
+            	app_code_list.append(temp)
+        	elif (temp == ';'):
+            	break
+    	#print(app_code)
+    	for i in range(0,len(app_code_list)):
+        	app_code_list[i] = (bytearray.fromhex(app_code_list[i]))
+    
+    	print(app_code_list)   
+    	#print(type(app_code_list[0]))
+    	#CODE_SIZE = len(app_code_list)
+    	#print("CODE SIZE = ",CODE_SIZE," , Num of Page = ", NumOfPage)
+    	print("PY_DEBUG: CLOSING FILE.")
+    	#print(text.close())
+    	return app_code_list
+
+
+ 
 </details>
