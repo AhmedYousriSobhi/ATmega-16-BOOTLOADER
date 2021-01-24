@@ -279,7 +279,7 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
 ##### ‣ if you notice, the first then to do when jumping to com Board, is to reset the AVR MCU, as explained in BOOTLOADER SECTION above, that the bootloader sends some starting messages, and ofcourse these messages are sent directly as the AVR is powered and we missed these messages while starting python script. That's why we need to reset the MCU after opening the COM port.
 ##### ‣ Let's Press the push button that connected to AVR RESET pin:
 
-#### <img align="right" src="https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG">
+![sc (1)](https://user-images.githubusercontent.com/66730765/105475966-b8d28e80-5ca8-11eb-8079-5cb59e034458.PNG)
 ##### ‣ As you can see, there are two debug-texter here: <br/>
 ∙ PY_DEBUG : is from Python script.<br/>
 ∙ BLD_DEBUG : is from ATmega-16 BOOTLOADER.
