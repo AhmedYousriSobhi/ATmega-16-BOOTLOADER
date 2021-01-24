@@ -389,9 +389,9 @@ I.2.2- The Generated APP CODE Hex file is located inside the Debug folder, like 
    - The answer for that as i said upove in Application code section is that: if the user wants to upload its bootloader code with an array of APP Code embedded inside it, but i said it would does not have any meaning for the bootloader conept, as now you will simply just upload a code in different flash memory address and write another code in the flash memory and run it.
  - This "Squeezed text (92 lines)" is just because there is a print for the list as i was testing the code and want to know how the list looks like, you can simply comment this print line inside the "TXT_FILE_HANDLER.py". 
    
-#### <img align="left" width="450" height="300" src="https://user-images.githubusercontent.com/66730765/105630533-85cbfe80-5e52-11eb-8ae5-6dc5d9b07470.png">
+![Screenshot (11)](https://user-images.githubusercontent.com/66730765/105630533-85cbfe80-5e52-11eb-8ae5-6dc5d9b07470.png)
 
-#### <img align="right" width="460" height="300" src="https://user-images.githubusercontent.com/66730765/105630650-0a1e8180-5e53-11eb-982c-6120bdbb7c91.png"><br><br>
+![Screem (1)](https://user-images.githubusercontent.com/66730765/105630650-0a1e8180-5e53-11eb-982c-6120bdbb7c91.png)<br><br>
 
 ### ◦ Command : BLD_FLASH
 #### <img align="right" src="https://user-images.githubusercontent.com/66730765/105631360-d04f7a00-5e56-11eb-9985-f3e5a592a49c.png">
